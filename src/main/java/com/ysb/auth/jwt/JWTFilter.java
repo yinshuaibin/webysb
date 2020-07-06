@@ -51,7 +51,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                throw new BusinessException("not login");
             }
         }
-        return true;
+        throw new BusinessException("no Authorization");
     }
 
 
