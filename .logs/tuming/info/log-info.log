@@ -89,3 +89,19 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 ===2020-07-06 10:36:17.560 INFO  com.ysb.YsbApplication Line:61  - Started YsbApplication in 3.104 seconds (JVM running for 3.983)
 ===2020-07-06 10:36:36.004 INFO  org.springframework.web.servlet.DispatcherServlet Line:525 - Initializing Servlet 'dispatcherServlet'
 ===2020-07-06 10:36:36.009 INFO  org.springframework.web.servlet.DispatcherServlet Line:547 - Completed initialization in 4 ms
+===2020-07-06 10:37:25.723 INFO  com.ysb.YsbApplication Line:55  - Starting YsbApplication on LAPTOP-AB63N733 with PID 11128 (D:\xm\ysb\webysb\target\classes started by abin in D:\xm\ysb\webysb)
+===2020-07-06 10:37:25.725 INFO  com.ysb.YsbApplication Line:655 - The following profiles are active: dev
+===2020-07-06 10:37:26.333 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate Line:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+===2020-07-06 10:37:26.335 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate Line:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+===2020-07-06 10:37:26.361 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate Line:187 - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces.
+===2020-07-06 10:37:26.574 INFO  com.ysb.auth.shiro.ShiroConfiguration Line:52  - --------------shiro已经加载----------------
+===2020-07-06 10:37:27.218 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer Line:108 - Tomcat initialized with port(s): 9998 (http)
+===2020-07-06 10:37:27.306 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Line:285 - Root WebApplicationContext: initialization completed in 1531 ms
+===2020-07-06 10:37:27.557 INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor Line:181 - Initializing ExecutorService 'applicationTaskExecutor'
+===2020-07-06 10:37:27.829 INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure Line:56  - Init DruidDataSource
+===2020-07-06 10:37:28.083 INFO  com.alibaba.druid.pool.DruidDataSource Line:983 - {dataSource-1} inited
+===2020-07-06 10:37:28.514 INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler Line:181 - Initializing ExecutorService 'taskScheduler'
+===2020-07-06 10:37:28.564 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer Line:220 - Tomcat started on port(s): 9998 (http) with context path ''
+===2020-07-06 10:37:28.575 INFO  com.ysb.YsbApplication Line:61  - Started YsbApplication in 3.372 seconds (JVM running for 4.418)
+===2020-07-06 10:37:31.604 INFO  org.springframework.web.servlet.DispatcherServlet Line:525 - Initializing Servlet 'dispatcherServlet'
+===2020-07-06 10:37:31.612 INFO  org.springframework.web.servlet.DispatcherServlet Line:547 - Completed initialization in 8 ms

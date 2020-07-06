@@ -5,3 +5,4 @@
 ===2020-07-06 09:19:53.392 WARN  org.mybatis.spring.mapper.ClassPathMapperScanner Line:44  - No MyBatis mapper was found in '[com.ysb.dao, com.ysb.auth.dao]' package. Please check your configuration.
 ===2020-07-06 10:04:14.435 WARN  org.mybatis.spring.mapper.ClassPathMapperScanner Line:44  - No MyBatis mapper was found in '[com.ysb.dao, com.ysb.auth.dao]' package. Please check your configuration.
 ===2020-07-06 10:36:15.696 WARN  org.mybatis.spring.mapper.ClassPathMapperScanner Line:44  - No MyBatis mapper was found in '[com.ysb.dao, com.ysb.auth.dao]' package. Please check your configuration.
+===2020-07-06 10:37:26.444 WARN  org.mybatis.spring.mapper.ClassPathMapperScanner Line:44  - No MyBatis mapper was found in '[com.ysb.dao, com.ysb.auth.dao]' package. Please check your configuration.
