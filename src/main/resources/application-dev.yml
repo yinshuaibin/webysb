@@ -1,0 +1,76 @@
+﻿﻿common:
+  ip: 127.0.0.1
+server:
+  port: 9998
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://${common.ip}:3306/facedb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+      username: root
+      password: CJ8AzTiVwZdJihNuyeYOeNpzeo1KndhRRlGr2wH5crWe9s4sYFbtGi5iUzva5l4YfBRqhz4zyGYv4miC8rjVww==
+      #连接池的配置信息
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: false
+      test-on-borrow: false
+      test-on-return: false
+      filter.config.enabled: true
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALBCiB/HyM/WdejJ+3ZPHLATs+/2QyLxBi+3Qx/ftXmYb3O4U3MyVMkmXjYbd8MKYj7WwXXCVzv0j8qxj7ejvSsCAwEAAQ==
+      use-global-data-source-stat: true
+#  redis:
+#    host: 120.27.60.184
+#    port: 6379
+#    # 密码 没有可以不写
+#    password: 123456
+#    lettuce:
+#      pool:
+#        # 连接池最大连接数, 默认8 使用负值表示没有限制
+#        max-active: 8
+#        # 连接池最大阻塞等待时间 默认-1 使用负值表示没有限制
+#        max-wait: -1ms
+#        # 连接池最大空闲连接
+#        max-idle: 8
+#        # 连接池最小空闲连接
+#        min-idle: 0
+#    # redis默认情况下有16个分片, 这里配置具体的使用分片, 默认为0
+#    database: 0
+#    # 连接超时时间, spring boot2.0类型为Dutation, 需指明单位
+#    timeout: 10000ms
+#  cache:
+#    type: redis
+
+#pagehelper分页插件配置
+pagehelper:
+  #查询合理化,如果页数过大,默认查询最后一页
+  reasonable: false
+  #分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页(禁止使用)
+  support-methods-arguments: false
+  #用于从对象中根据属性名取值
+  params: count=countSql
+  #数据库类型,可以不配置,插件默认检测
+  helper-dialect: mysql
+
+# 下划线到驼峰形式的映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ferret.bean
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+
+#上传文件/图片的保存路径,替换url路径
+image:
+  prefix:
+    # 1.上传图片地址的路径目录前缀
+    uploadDir: E:/ftpdata/upload
+    # 替换成url路径的地址前缀
+    uploadUrl: http://${common.ip}:${server.port}/upload
