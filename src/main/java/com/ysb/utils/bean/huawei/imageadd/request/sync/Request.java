@@ -1,7 +1,6 @@
 package com.ysb.utils.bean.huawei.imageadd.request.sync;
 
-
-import com.ysb.utils.bean.huawei.imageadd.request.Peoples;
+import com.y.utils.bean.huawei.imageadd.request.Peoples;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

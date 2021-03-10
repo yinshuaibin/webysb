@@ -1,7 +1,6 @@
 package com.ysb.utils.bean.huawei.imageadd.response;
 
-
-import com.ysb.utils.bean.huawei.Result;
+import com.y.utils.bean.huawei.Result;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

@@ -47,6 +47,6 @@ public class XmlUtils {
     public static <T> T xmlToJavaBean(String xml, Class<T> c) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(c);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (T)unmarshaller.unmarshal(new StringReader(xml));
+        return c.cast(unmarshaller.unmarshal(new StringReader(xml)));
     }
 }

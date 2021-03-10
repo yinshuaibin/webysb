@@ -1,5 +1,6 @@
 package com.ysb.utils.bean.huawei.onetomany.request;
 
+import javax.validation.constraints.NotNull;
 
 /**
  * @author yinshuaibin
@@ -39,7 +40,7 @@ public class Picture {
      *
      * @param base64
      */
-    public Picture(String base64) {
+    public Picture(@NotNull String base64) {
         this.base64 = base64;
     }
 

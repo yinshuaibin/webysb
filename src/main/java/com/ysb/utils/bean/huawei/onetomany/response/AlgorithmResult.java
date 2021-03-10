@@ -1,7 +1,6 @@
 package com.ysb.utils.bean.huawei.onetomany.response;
 
-
-import com.ysb.utils.bean.huawei.Result;
+import com.y.utils.bean.huawei.Result;
 
 /**
  * @author yinshuaibin

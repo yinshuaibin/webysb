@@ -105,7 +105,7 @@ public class GlobalExceptionHandler {
      * @param status  http状态
      * @return 返回结果实体
      */
-    public ResponseEntity response(String message, Exception e, HttpStatus status) {
+    private ResponseEntity response(String message, Exception e, HttpStatus status) {
         log.error(message, e);
         Map<String,String> map = new HashMap<>();
         map.put(ERROR, message);

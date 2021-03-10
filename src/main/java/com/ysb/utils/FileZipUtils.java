@@ -47,7 +47,7 @@ public class FileZipUtils {
         }
     }
 
-    private static void fileTOZipInput(String filePath, String zipPath){
+    private static void fileToZipInput(String filePath, String zipPath){
         try(ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(new File(zipPath)))){
             for (int x = 0; x < 80; x++){
                 try(FileInputStream f = new FileInputStream(filePath)) {
@@ -57,10 +57,10 @@ public class FileZipUtils {
                     while ((byts = f.read()) != -1){
                         zipOutputStream.write(byts);
                     }
-                }catch (IOException e){
+                }catch (IOException ignored){
                 }
             }
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
     }
@@ -74,11 +74,11 @@ public class FileZipUtils {
                 zipOutputStream.putNextEntry(new ZipEntry(x +"_ddd.jpg"));
                 try (FileChannel fileChannel = new FileInputStream(filePath).getChannel()){
                     fileChannel.transferTo(0, fileChannel.size(), writableByteChannel);
-                }catch (IOException e){
+                }catch (IOException ignored){
 
                 }
             }
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
     }

@@ -8,11 +8,20 @@ public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    // 业务类型
+    /**
+     * 业务类型
+     */
     private String bizType;
-    // 业务代码
+
+    /**
+     * 业务代码
+     */
     private int bizCode;
-    // 错误信息
+
+
+    /**
+     * 错误代码
+     */
     private String message;
 
     public BusinessException(String bizType, int bizCode, String message){
