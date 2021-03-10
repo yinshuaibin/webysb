@@ -14,14 +14,16 @@ import java.util.List;
  * @date 2020/9/1 10:55
  */
 public class TestFor {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         List<String> list = new ArrayList<String>(){{add("1");}};
-        for (Iterator<String> it = list.iterator(); it.hasNext(); ) {
-            String s = it.next();
+        for (String s : list) {
             System.out.println(s);
         }
+        // 下列方式的for可以看成while(true)无限循环
         for (int x = 0; ; x++){
-            System.out.println(x);
+            if (x == 10000){
+                throw new RuntimeException();
+            }
         }
     }
 }
