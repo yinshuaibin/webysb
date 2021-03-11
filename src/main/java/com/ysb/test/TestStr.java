@@ -18,6 +18,14 @@ public class TestStr {
         getMemInfo();
         System.out.println();
         getDiskInfo();
+        String[] names = {"ABC", "XYZ", "ZOO"};
+        String s = names[1];
+        names[1] = "cat";
+        // s是"XYZ"还是"cat"? 是XYZ
+        System.out.println(s);
+        for (String name : names) {
+            System.out.println(name);
+        }
     }
     private static void getDiskInfo() {
         File[] disks = File.listRoots();

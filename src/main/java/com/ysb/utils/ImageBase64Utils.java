@@ -22,18 +22,7 @@ public class ImageBase64Utils {
      * @return "" 出现异常时, 正常返回base64字符串
      */
 	public static String getImageStr(String url) {
-	    //将图片文件转化为字节数组字符串，并对其进行Base64编码处理
-        byte[] data = null;
-        //读取图片字节数组
-        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(url))){
-            data = new byte[in.available()];
-            int read = in.read(data);
-            System.out.println(read);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //对字节数组Base64编码
-        return  Base64.getEncoder().encodeToString(data);
+        return  Base64.getEncoder().encodeToString(image2byte(url));
 	}
 
     /**
@@ -95,14 +84,9 @@ public class ImageBase64Utils {
 		return outStream.toByteArray();
 	}
 
-    /**
-     * 图片转byte数组
-     * @param path 图片物理路径
-     * @return byte数组
-     */
-    public static byte[] image2byte(@NonNull String path){
+	public static byte[] image2byte2(@NonNull String path){
         byte[] data = null;
-        try (FileImageInputStream input = new FileImageInputStream(new File(path)); ByteArrayOutputStream output = new ByteArrayOutputStream()){
+	    try (FileImageInputStream input = new FileImageInputStream(new File(path)); ByteArrayOutputStream output = new ByteArrayOutputStream()){
             byte[] buf = new byte[1024];
             int numBytesRead = 0;
             while ((numBytesRead = input.read(buf)) != -1) {
@@ -111,7 +95,25 @@ public class ImageBase64Utils {
             data = output.toByteArray();
         }catch (IOException e){
            e.printStackTrace();
-           return new byte[]{};
+            data = new byte[]{};
+        }
+        return data;
+    }
+
+
+    /**
+     * 图片转byte数组
+     * @param path 图片物理路径
+     * @return byte数组
+     */
+    public static byte[] image2byte(@NonNull String path){
+        byte[] data = null;
+        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(path))){
+            data = new byte[in.available()];
+            in.read(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+            data = new byte[]{};
         }
         return data;
     }
