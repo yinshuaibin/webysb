@@ -27,6 +27,25 @@ spring:
       use-global-data-source-stat: true
   aop:
     auto: true
+  redis:
+    host: 120.27.60.184
+    port: 6379
+    # 密码 没有可以不写
+    password: a805346635
+    lettuce:
+      pool:
+        # 连接池最大连接数, 默认8 使用负值表示没有限制
+        max-active: 8
+        # 连接池最大阻塞等待时间 默认-1 使用负值表示没有限制
+        max-wait: -1ms
+        # 连接池最大空闲连接
+        max-idle: 8
+        # 连接池最小空闲连接
+        min-idle: 0
+    # redis默认情况下有16个分片, 这里配置具体的使用分片, 默认为0
+    database: 0
+    # 连接超时时间, spring boot2.0类型为Dutation, 需指明单位
+    timeout: 10000ms
 #pagehelper分页插件配置
 pagehelper:
   #查询合理化,如果页数过大,默认查询最后一页
@@ -45,12 +64,3 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
-
-
-#上传文件/图片的保存路径,替换url路径
-image:
-  prefix:
-    # 1.上传图片地址的路径目录前缀
-    uploadDir: E:/ftpdata/upload
-    # 替换成url路径的地址前缀
-    uploadUrl: http://${common.ip}:${server.port}/upload
