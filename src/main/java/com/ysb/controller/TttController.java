@@ -29,9 +29,9 @@ public class TttController {
 
 
     @ValidTokenAnnotation
-    @RequestMapping("/t1")
+    @RequestMapping("/testAuth")
     public Object ttt(){
-        return "12312312";
+        return "获取了需要权限的资源";
     }
 
 

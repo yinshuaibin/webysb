@@ -1,4 +1,4 @@
-package com.ysb.spring;
+package com.ysb.config.spring;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import lombok.extern.slf4j.Slf4j;

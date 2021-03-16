@@ -1,4 +1,4 @@
-package com.ysb.spring;
+package com.ysb.config.spring;
 
 import com.ysb.annotation.ValidTokenAnnotation;
 import com.ysb.exception.BusinessException;
