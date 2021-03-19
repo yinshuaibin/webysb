@@ -1,5 +1,6 @@
 package com.ysb.config.spring.security;
 
+import com.ysb.config.spring.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,8 +8,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author yinshuaibin
@@ -45,19 +48,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     private SessionExpiredExpiredStrategy sessionExpiredExpiredStrategy;
 
+    private JwtFilter jwtFilter;
+
     @Autowired
     public WebSecurityConfig(MyUserDetailServiceImpl myUserDetailService,
                              NoPermissionEntryPoint customizeAuthenticationEntryPoint,
                              LoginFailureHandler loginFailureHandler,
                              LoginSuccessHandler loginSuccessHandler,
                              LogoutHandler logoutHandler,
-                             SessionExpiredExpiredStrategy sessionExpiredExpiredStrategy){
+                             SessionExpiredExpiredStrategy sessionExpiredExpiredStrategy,
+                             JwtFilter jwtFilter){
         this.myUserDetailService = myUserDetailService;
         this.customizeAuthenticationEntryPoint = customizeAuthenticationEntryPoint;
         this.loginFailureHandler = loginFailureHandler;
         this.loginSuccessHandler = loginSuccessHandler;
         this.logoutHandler = logoutHandler;
         this.sessionExpiredExpiredStrategy = sessionExpiredExpiredStrategy;
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -83,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers("/testAuth").hasAnyAuthority("hasRole")
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**").authenticated()
                 // 无权限返回信息
                 .and().exceptionHandling().authenticationEntryPoint(customizeAuthenticationEntryPoint)
                 //登入
@@ -102,9 +109,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 // 限制同一个用户只允许一个登录
                 .and().sessionManagement()
+                // session 生成策略用无状态策略
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .maximumSessions(1)
                 //会话信息过期策略会话信息过期策略(账号被挤下线)
                 .expiredSessionStrategy(sessionExpiredExpiredStrategy);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     /**

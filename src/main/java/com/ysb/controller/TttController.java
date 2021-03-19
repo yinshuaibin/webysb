@@ -16,13 +16,13 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class TttController {
 
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     private RestTemplate restTemplate;
 
     @Autowired
-    public TttController(StringRedisTemplate redisTemplate, RestTemplate restTemplate){
-        this.redisTemplate = redisTemplate;
+    public TttController(StringRedisTemplate stringRedisTemplate, RestTemplate restTemplate){
+        this.stringRedisTemplate = stringRedisTemplate;
         this.restTemplate = restTemplate;
     }
 
@@ -43,8 +43,8 @@ public class TttController {
 
     @RequestMapping("/redisTest")
     public String redisTest(){
-        redisTemplate.opsForValue().set("ttt", "沃日沃日", 3, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set("ttt", "沃日沃日", 3, TimeUnit.SECONDS);
         System.out.println(restTemplate);
-        return redisTemplate.opsForValue().get("ttt");
+        return stringRedisTemplate.opsForValue().get("ttt");
     }
 }

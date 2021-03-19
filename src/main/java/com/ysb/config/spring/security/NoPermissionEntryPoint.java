@@ -22,7 +22,7 @@ public class NoPermissionEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         Map<String, String> result = new HashMap<>(3);
         result.put("errorCode", "401");
-        result.put("errorMsg", "无权限访问");
+        result.put("errorMsg", e.getMessage());
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(String.valueOf(result));
     }

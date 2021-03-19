@@ -1,5 +1,6 @@
 package com.ysb.config.spring.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -16,10 +17,10 @@ import java.io.IOException;
  * @description 登录失败处理逻辑
  */
 @Component
+@Slf4j
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        e.printStackTrace();
         //返回json数据
         String result;
         if (e instanceof AccountExpiredException) {
