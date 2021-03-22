@@ -2,8 +2,10 @@ package com.ysb.config.spring.jwt;
 
 import com.ysb.config.spring.security.MyUserDetailServiceImpl;
 import com.ysb.config.spring.security.NoPermissionEntryPoint;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ import java.io.IOException;
  *              抛出异常, myUserDetailService.loadUserByUsername调用后并不会调用LoginSuccessHandler
  */
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     private MyUserDetailServiceImpl myUserDetailService;
@@ -44,12 +47,13 @@ public class JwtFilter extends OncePerRequestFilter {
             String tokenPrefix = JwtUtil.getTokenPrefix();
             if (StringUtils.isNotBlank(header) && header.startsWith(tokenPrefix)){
                 String token = header.replace(tokenPrefix, "");
-                String username = JwtUtil.getUsername(token);
                 UserDetails userDetails = null;
                 try {
+                    String username = JwtUtil.getUsername(token);
                     userDetails = myUserDetailService.loadUserByUsername(username);
-                }catch (AuthenticationException e){
-                    noPermissionEntryPoint.commence(httpServletRequest, httpServletResponse, e);
+                } catch (Exception e){
+                    noPermissionEntryPoint.commence(httpServletRequest, httpServletResponse,
+                            new AuthenticationServiceException(e.getMessage()));
                 }
                 if (userDetails != null){
                     SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails.getUsername(),

@@ -21,8 +21,8 @@ public class NoPermissionEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         Map<String, String> result = new HashMap<>(3);
-        result.put("errorCode", "401");
-        result.put("errorMsg", e.getMessage());
+        result.put("code", "401");
+        result.put("msg", "您未登录或者权限不足");
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(String.valueOf(result));
     }
