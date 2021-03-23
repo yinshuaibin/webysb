@@ -1,13 +1,11 @@
-﻿﻿common:
-  ip: 127.0.0.1
-server:
+﻿server:
   port: 9998
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://${common.ip}:3306/facedb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://120.27.60.184:3306/facedb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
       username: root
-      password: CJ8AzTiVwZdJihNuyeYOeNpzeo1KndhRRlGr2wH5crWe9s4sYFbtGi5iUzva5l4YfBRqhz4zyGYv4miC8rjVww==
+      password: ed4BGCekWVvedgSnn4vpjd2iiiHG2mi7hiAV/RTMcFSSQZkzAtdg6CZXq4AzKabVF8wF7vtvqoVkaU1n119c+A==
       #连接池的配置信息
       initial-size: 5
       max-active: 20
@@ -23,7 +21,7 @@ spring:
       test-on-return: false
       filter.config.enabled: true
       filters: stat,wall
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALBCiB/HyM/WdejJ+3ZPHLATs+/2QyLxBi+3Qx/ftXmYb3O4U3MyVMkmXjYbd8MKYj7WwXXCVzv0j8qxj7ejvSsCAwEAAQ==
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALf5dGe2o8nUPspdr90SN/+QJfd3xeP+L6lvOIPGeVS3rFh+tGd1jlsoBc8zDVILvVEtq35sdHqH/GZUIRqwe40CAwEAAQ==
       use-global-data-source-stat: true
   aop:
     auto: true
@@ -60,7 +58,7 @@ pagehelper:
 # 下划线到驼峰形式的映射
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.ferret.bean
+  type-aliases-package: com.ysb.bean
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true

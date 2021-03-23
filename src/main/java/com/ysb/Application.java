@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
+@MapperScan({"com.ysb.dao","com.ysb.dao2"})
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

@@ -23,12 +23,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        System.out.println("登录成功");
         // 更新用户表上次登录时间、更新人、更新时间等字段
         User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(principal.getPassword());
         // 一样的效果 User principal = (User)authentication.getPrincipal()
-        System.out.println(principal);
         // 生成token返回前台
         String sign = JwtUtil.sign(principal.getUsername());
         //此处还可以进行一些处理，比如登录成功之后可能需要返回给前台当前用户有哪些菜单权限，

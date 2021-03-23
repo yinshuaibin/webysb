@@ -44,7 +44,6 @@ public class TttController {
     @RequestMapping("/redisTest")
     public String redisTest(){
         stringRedisTemplate.opsForValue().set("ttt", "沃日沃日", 3, TimeUnit.SECONDS);
-        System.out.println(restTemplate);
         return stringRedisTemplate.opsForValue().get("ttt");
     }
 }

@@ -89,7 +89,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
-        http.authorizeRequests().antMatchers("/ysb/**").hasAnyAuthority("hasRole")
+        http.authorizeRequests()
+                .antMatchers("/ysb/createUser").permitAll()
+                .antMatchers("/ysb/**").hasAnyAuthority("hasRole")
                 .antMatchers("/open/**").permitAll()
                 .antMatchers("/**").authenticated()
                 // 无权限返回信息
