@@ -42,23 +42,21 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        if (SecurityContextHolder.getContext().getAuthentication() == null) {
-            String header = httpServletRequest.getHeader(JwtUtil.getLoginSign());
-            String tokenPrefix = JwtUtil.getTokenPrefix();
-            if (StringUtils.isNotBlank(header) && header.startsWith(tokenPrefix)){
-                String token = header.replace(tokenPrefix, "");
-                UserDetails userDetails = null;
-                try {
-                    String username = JwtUtil.getUsername(token);
-                    userDetails = myUserDetailService.loadUserByUsername(username);
-                } catch (Exception e){
-                    noPermissionEntryPoint.commence(httpServletRequest, httpServletResponse,
-                            new AuthenticationServiceException(e.getMessage()));
-                }
-                if (userDetails != null){
-                    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails.getUsername(),
-                            userDetails.getPassword(), userDetails.getAuthorities()));
-                }
+        String header = httpServletRequest.getHeader(JwtUtil.getLoginSign());
+        String tokenPrefix = JwtUtil.getTokenPrefix();
+        if (StringUtils.isNotBlank(header) && header.startsWith(tokenPrefix)){
+            String token = header.replace(tokenPrefix, "");
+            UserDetails userDetails = null;
+            try {
+                String username = JwtUtil.getUsername(token);
+                userDetails = myUserDetailService.loadUserByUsername(username);
+            } catch (Exception e){
+                noPermissionEntryPoint.commence(httpServletRequest, httpServletResponse,
+                        new AuthenticationServiceException(e.getMessage()));
+            }
+            if (userDetails != null){
+                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails,
+                        userDetails.getPassword(), userDetails.getAuthorities()));
             }
         }
         // 进入下一个过滤器, 由于SecurityContext,无权限并不会放行

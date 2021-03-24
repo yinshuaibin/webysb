@@ -1,6 +1,7 @@
 package com.ysb.controller;
 
 import com.ysb.annotation.ValidTokenAnnotation;
+import com.ysb.controller.base.OpenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/7/6 9:19
  */
 @RestController
-public class TttController {
+public class TttController extends OpenController {
 
     private StringRedisTemplate stringRedisTemplate;
 

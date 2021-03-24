@@ -11,6 +11,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.TimeUnit;
@@ -36,9 +38,17 @@ public class ValidTokenAspect {
     @Around("valid() && @annotation(validToken)")
     public Object before(ProceedingJoinPoint jp, ValidTokenAnnotation validToken) throws Throwable {
         String name = jp.getSignature().getName();
-        String s = redisTemplate.opsForValue().get(name);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String key;
+        if ( principal instanceof User){
+            User user = (User)principal;
+            key = name + user.getUsername();
+        }else {
+            key = name + principal;
+        }
+        String s = redisTemplate.opsForValue().get(key);
         if (s == null){
-            redisTemplate.opsForValue().set(name, "time", 5, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(key, "time", 5, TimeUnit.SECONDS);
             return jp.proceed();
         }
         throw new BusinessException("重复操作!!!!!!!");
