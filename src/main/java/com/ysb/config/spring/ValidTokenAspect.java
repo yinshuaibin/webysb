@@ -2,18 +2,15 @@ package com.ysb.config.spring;
 
 import com.ysb.annotation.ValidTokenAnnotation;
 import com.ysb.exception.BusinessException;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +25,7 @@ public class ValidTokenAspect {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
-    public ValidTokenAspect(StringRedisTemplate redisTemplate, RestTemplate restTemplate){
+    public ValidTokenAspect(StringRedisTemplate redisTemplate){
         this.redisTemplate = redisTemplate;
     }
 

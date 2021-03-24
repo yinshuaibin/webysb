@@ -1,7 +1,6 @@
 package com.ysb.service.impl;
 
 import com.ysb.bean.User;
-import com.ysb.config.spring.jwt.JwtUtil;
 import com.ysb.dao.UserMapper;
 import com.ysb.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
