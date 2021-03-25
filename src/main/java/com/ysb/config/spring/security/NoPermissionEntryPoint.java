@@ -1,5 +1,6 @@
 package com.ysb.config.spring.security;
 
+import com.ysb.utils.JacksonUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,6 @@ public class NoPermissionEntryPoint implements AuthenticationEntryPoint {
         result.put("code", "401");
         result.put("msg", "您未登录或者权限不足");
         httpServletResponse.setContentType("text/json;charset=utf-8");
-        httpServletResponse.getWriter().write(String.valueOf(result));
+        httpServletResponse.getWriter().write(JacksonUtils.beanToJsonStr(result));
     }
 }

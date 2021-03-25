@@ -27,8 +27,6 @@ public class TttController extends OpenController {
         this.restTemplate = restTemplate;
     }
 
-
-
     @ValidTokenAnnotation
     @RequestMapping("/testAuth")
     public Object ttt(){
@@ -42,6 +40,7 @@ public class TttController extends OpenController {
         return "ttt2";
     }
 
+    @ValidTokenAnnotation
     @RequestMapping("/redisTest")
     public String redisTest(){
         stringRedisTemplate.opsForValue().set("ttt", "沃日沃日", 3, TimeUnit.SECONDS);

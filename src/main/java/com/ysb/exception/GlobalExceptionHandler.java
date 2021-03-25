@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     /**
      * 400 - Bad Request
      * @param e 参数无法解析异常
-     * @return
+     * @return error
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -81,7 +81,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleBusinessException(HttpServletRequest request, BusinessException e) {
         log.error("BusinessException Handler --- Host: {} invokes url: {} ERROR: {}"
                 , request.getRemoteHost(), request.getRequestURL(), e.getMessage());
-        return response(e.getMessage(), e, HttpStatus.INTERNAL_SERVER_ERROR);
+        return response(e.getMessage(), e, HttpStatus.valueOf(e.getBizCode()));
     }
 
     @ExceptionHandler(SQLException.class)
@@ -95,7 +95,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleException(HttpServletRequest request, Exception e) {
         log.error("DefaultException Handler --- Host: {} invokes url: {} ERROR: {}"
                 , request.getRemoteHost(), request.getRequestURL(), e.getMessage());
-        return response("服务器程序遇到错误!", e, HttpStatus.INTERNAL_SERVER_ERROR);
+        return response("服务器程序遇到错误,请联系管理员!", e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -106,9 +106,9 @@ public class GlobalExceptionHandler {
      * @return 返回结果实体
      */
     private ResponseEntity response(String message, Exception e, HttpStatus status) {
-        log.error(message, e);
-        Map<String,String> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>(2);
         map.put(ERROR, message);
+        map.put("code", status.value());
         return new ResponseEntity<>(map, status);
     }
 }

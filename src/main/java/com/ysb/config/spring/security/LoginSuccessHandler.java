@@ -1,6 +1,7 @@
 package com.ysb.config.spring.security;
 
 import com.ysb.config.spring.jwt.JwtUtil;
+import com.ysb.utils.JacksonUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -34,6 +35,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         //处理编码方式，防止中文乱码的情况
         httpServletResponse.setContentType("text/json;charset=utf-8");
         //HttpServletResponse中返回给前台
-        httpServletResponse.getWriter().write(new HashMap<String, String>(2){{put("code","200");put("msg",sign);}}.toString());
+        httpServletResponse.getWriter().write(JacksonUtils.beanToJsonStr(new HashMap<String, String>(2){{put("code","200");put("msg",sign);}}));
     }
 }

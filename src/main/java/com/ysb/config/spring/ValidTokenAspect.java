@@ -48,6 +48,6 @@ public class ValidTokenAspect {
             redisTemplate.opsForValue().set(key, "time", 5, TimeUnit.SECONDS);
             return jp.proceed();
         }
-        throw new BusinessException("重复操作!!!!!!!");
+        throw new BusinessException(402, "重复操作");
     }
 }
