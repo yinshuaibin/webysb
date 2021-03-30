@@ -95,7 +95,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleException(HttpServletRequest request, Exception e) {
         log.error("DefaultException Handler --- Host: {} invokes url: {} ERROR: {}"
                 , request.getRemoteHost(), request.getRequestURL(), e.getMessage());
-        return response("服务器程序遇到错误,请联系管理员!", e, HttpStatus.INTERNAL_SERVER_ERROR);
+        return response("服务器程序遇到错误", e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**

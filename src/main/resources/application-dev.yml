@@ -3,7 +3,7 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://120.27.60.184:3306/facedb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://120.27.60.184:3306/ysb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
       username: root
       password: ed4BGCekWVvedgSnn4vpjd2iiiHG2mi7hiAV/RTMcFSSQZkzAtdg6CZXq4AzKabVF8wF7vtvqoVkaU1n119c+A==
       #连接池的配置信息
@@ -43,7 +43,7 @@ spring:
     # redis默认情况下有16个分片, 这里配置具体的使用分片, 默认为0
     database: 0
     # 连接超时时间, spring boot2.0类型为Dutation, 需指明单位
-    timeout: 10000ms
+    timeout: 3000ms
 #pagehelper分页插件配置
 pagehelper:
   #查询合理化,如果页数过大,默认查询最后一页

@@ -93,6 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ysb/createUser").permitAll()
                 .antMatchers("/ysb/**").hasAnyAuthority("hasRole")
                 .antMatchers("/open/**").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/**").authenticated()
                 // 无权限返回信息
                 .and().exceptionHandling().authenticationEntryPoint(customizeAuthenticationEntryPoint)
