@@ -1,21 +1,12 @@
-common:
-  ip: 192.168.6.224
-
-# 聚类库地址
-facelibpath: E:/FaceProgram/dycluster
-
-# 服务启动的端口号
 server:
-  port: 9080
-
+  port: 9998
 spring:
   datasource:
     druid:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://${common.ip}:3306/db_checkface?characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://120.27.60.184:3306/ysb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
       username: root
-      password: 123456
-      # 连接池的配置信息
+      password: ed4BGCekWVvedgSnn4vpjd2iiiHG2mi7hiAV/RTMcFSSQZkzAtdg6CZXq4AzKabVF8wF7vtvqoVkaU1n119c+A==
+      #连接池的配置信息
       initial-size: 5
       max-active: 20
       min-idle: 5
@@ -28,68 +19,52 @@ spring:
       test-while-idle: false
       test-on-borrow: false
       test-on-return: false
-      filters: stat,wall,log4j
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      filter.config.enabled: true
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALf5dGe2o8nUPspdr90SN/+QJfd3xeP+L6lvOIPGeVS3rFh+tGd1jlsoBc8zDVILvVEtq35sdHqH/GZUIRqwe40CAwEAAQ==
       use-global-data-source-stat: true
-
+  aop:
+    auto: true
+  redis:
+    host: 120.27.60.184
+    port: 6379
+    # 密码 没有可以不写
+    password: a805346635
+    lettuce:
+      pool:
+        # 连接池最大连接数, 默认8 使用负值表示没有限制
+        max-active: 8
+        # 连接池最大阻塞等待时间 默认-1 使用负值表示没有限制
+        max-wait: -1ms
+        # 连接池最大空闲连接
+        max-idle: 8
+        # 连接池最小空闲连接
+        min-idle: 0
+    # redis默认情况下有16个分片, 这里配置具体的使用分片, 默认为0
+    database: 0
+    # 连接超时时间, spring boot2.0类型为Dutation, 需指明单位
+    timeout: 3000ms
+  servlet:
+    multipart:
+      max-request-size: 10MB #最大请求文件的大小
+      max-file-size: 20MB #设置单个文件最大长度
 #pagehelper分页插件配置
 pagehelper:
-  reasonable: true
-  support-methods-arguments: true
+  #查询合理化,如果页数过大,默认查询最后一页
+  reasonable: false
+  #分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页(禁止使用)
+  support-methods-arguments: false
+  #用于从对象中根据属性名取值
   params: count=countSql
+  #数据库类型,可以不配置,插件默认检测
   helper-dialect: mysql
+
+picPath: /root/web
 
 # 下划线到驼峰形式的映射
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.ferret.bean
+  type-aliases-package: com.ysb.bean
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
-
-
-#上传文件/图片的保存路径,替换url路径
-image:
-  prefix:
-    # 上传图片地址的路径目录前缀
-    uploadDir: D:/ftpdata/upload
-    # 替换成url路径的地址前缀
-    uploadUrl: http://${common.ip}:90/images
-    # tb_historypass表中图片保存的路径前缀
-    historyDir: //${common.ip}/ftpdata
-    # 替换成url地址路径的前缀
-    historyUrl: http://${common.ip}:90/images
-    # 布控图片保存的路径目录
-    bukongDir: D:/ftpdata/BK
-    # 布控图片替换成url的前缀
-    bukongUrl: http://${common.ip}:90/images
-    # 聚类目录
-    clusterDir: E:/FaceProgram
-    # 聚类url前缀
-    clusterUrl: http://${common.ip}:90/clusters
-
-socket:
-# 服务端通过tcp连接
-  tcp:
-    ip: ${common.ip}
-    port:
-      # 监控浏览端口
-      monitor: 6901
-      # 监控报警端口
-      alarm: 4233
-      #bukong: 9995
-    #心跳间隔,单位秒
-    heartbeat: 60
-# websocket通过http连接.
-  web:
-    url: /stomp
-    destination-prefix:
-      - /topic
-      - /user
-
-# webservice 请求访问路径.
-webservice:
-  # 提取特征服务请求地址
-  featureUrl: http://${common.ip}:8088/face/featureExt
-  # 动态查询请求地址
-  wsdlUrl: http://${common.ip}:80/DynaService.asmx?wsdl

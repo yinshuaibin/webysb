@@ -91,9 +91,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/ysb/createUser").permitAll()
+                .antMatchers("/ysb/savePic").permitAll()
                 .antMatchers("/ysb/**").hasAnyAuthority("hasRole")
                 .antMatchers("/open/**").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/image/**").permitAll()
                 .antMatchers("/**").authenticated()
                 // 无权限返回信息
                 .and().exceptionHandling().authenticationEntryPoint(customizeAuthenticationEntryPoint)

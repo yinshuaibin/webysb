@@ -44,6 +44,11 @@ spring:
     database: 0
     # 连接超时时间, spring boot2.0类型为Dutation, 需指明单位
     timeout: 3000ms
+  servlet:
+    multipart:
+      max-request-size: 10MB #最大请求文件的大小
+      max-file-size: 20MB #设置单个文件最大长度
+
 #pagehelper分页插件配置
 pagehelper:
   #查询合理化,如果页数过大,默认查询最后一页
@@ -54,6 +59,8 @@ pagehelper:
   params: count=countSql
   #数据库类型,可以不配置,插件默认检测
   helper-dialect: mysql
+
+picPath: D:\pic
 
 # 下划线到驼峰形式的映射
 mybatis:

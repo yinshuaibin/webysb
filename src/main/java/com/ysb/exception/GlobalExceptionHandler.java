@@ -106,6 +106,7 @@ public class GlobalExceptionHandler {
      * @return 返回结果实体
      */
     private ResponseEntity response(String message, Exception e, HttpStatus status) {
+        log.error(message, e);
         Map<String,Object> map = new HashMap<>(2);
         map.put(ERROR, message);
         map.put("code", status.value());
