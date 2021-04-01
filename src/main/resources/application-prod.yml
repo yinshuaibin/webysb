@@ -59,7 +59,7 @@ pagehelper:
   #数据库类型,可以不配置,插件默认检测
   helper-dialect: mysql
 
-picPath: /root/web
+picPath: /root/pic
 
 # 下划线到驼峰形式的映射
 mybatis:
