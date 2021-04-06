@@ -92,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/ysb/createUser").permitAll()
                 .antMatchers("/ysb/savePic").permitAll()
+                .antMatchers("/websocket/**").permitAll()
                 .antMatchers("/ysb/**").hasAnyAuthority("hasRole")
                 .antMatchers("/open/**").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
