@@ -62,7 +62,6 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         log.info("接收到了用户 {} 发送的消息, {}", this.sid, message);
-        System.out.println(message);
         // 接受到心跳消息后, 将心跳消息返回
         String ping = "ping";
         if (ping.equals(message)){
@@ -71,7 +70,7 @@ public class WebSocketServer {
             Map map = JacksonUtils.jsonStrToBean(message, Map.class);
             Object sid = map.get("sid");
             if (sid != null){
-                sendInfo(map.get("sendMsg"), "message", sid);
+                sendInfo(map, "message", sid);
             }
         }
 
