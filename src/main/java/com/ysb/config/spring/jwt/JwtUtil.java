@@ -33,8 +33,9 @@ public class JwtUtil {
             Date expiresAt = verify.getExpiresAt();
             return expiresAt.after(new Date());
         }catch (Exception e){
-            log.error("校验密码出现错误, 错误为: {}", e.getMessage());
-            return false;
+            // SignatureVerificationException  校验失败
+            // TokenExpiredException 令牌过期
+            return true;
         }
     }
 

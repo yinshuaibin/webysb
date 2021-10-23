@@ -43,11 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     private LoginFailureHandler loginFailureHandler;
 
-    /**
-     * 回话过期
-     */
-    private SessionExpiredExpiredStrategy sessionExpiredExpiredStrategy;
-
     private JwtFilter jwtFilter;
 
     @Autowired
@@ -56,14 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                              LoginFailureHandler loginFailureHandler,
                              LoginSuccessHandler loginSuccessHandler,
                              LogoutHandler logoutHandler,
-                             SessionExpiredExpiredStrategy sessionExpiredExpiredStrategy,
                              JwtFilter jwtFilter){
         this.myUserDetailService = myUserDetailService;
         this.customizeAuthenticationEntryPoint = customizeAuthenticationEntryPoint;
         this.loginFailureHandler = loginFailureHandler;
         this.loginSuccessHandler = loginSuccessHandler;
         this.logoutHandler = logoutHandler;
-        this.sessionExpiredExpiredStrategy = sessionExpiredExpiredStrategy;
         this.jwtFilter = jwtFilter;
     }
 
@@ -91,6 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/ysb/createUser").permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/ysb/savePic").permitAll()
                 .antMatchers("/websocket/**").permitAll()
                 .antMatchers("/ysb/**").hasAnyAuthority("hasRole")
@@ -112,15 +106,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()//允许所有用户
                 //登出成功处理逻辑
                 .logoutSuccessHandler(logoutHandler)
-                //登出之后删除cookie
-                .deleteCookies("JSESSIONID")
-                // 限制同一个用户只允许一个登录
                 .and().sessionManagement()
                 // session 生成策略用无状态策略
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .maximumSessions(1)
-                //会话信息过期策略会话信息过期策略(账号被挤下线)
-                .expiredSessionStrategy(sessionExpiredExpiredStrategy);
+        ;
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

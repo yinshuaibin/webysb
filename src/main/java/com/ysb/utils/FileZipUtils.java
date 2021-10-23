@@ -5,27 +5,28 @@ import java.io.*;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
-import java.time.Clock;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class FileZipUtils {
 
     public static void main(String[] args) {
-        String s = "upload/111.jpg";
-        String[] split = s.split("/");
-        String s1 = split[split.length - 1];
-        System.out.println(s1);
-        long start = Clock.systemDefaultZone().millis();
-        fileToZipBufferInput("d://ddd.jpg", "d://ddd.zip");
-        long end = Clock.systemDefaultZone().millis();
-        System.out.println("bufferInputStream用时:" + (end - start));
-        // fileTOZipInput("d://ddd.jpg", "d:/ddd2.zip");
-        long end2 = Clock.systemDefaultZone().millis();
-        System.out.println("intpuStream用时: " + (end2 - end));
-        fileToZipChannel("d://ddd.jpg", "d:/ddd3.zip");
-        long end3 = Clock.systemDefaultZone().millis();
-        System.out.println("fileChannel用时: " + (end3 - end2));
+//        String s = "upload/111.jpg";
+////        String[] split = s.split("/");
+////        String s1 = split[split.length - 1];
+////        System.out.println(s1);
+////        long start = Clock.systemDefaultZone().millis();
+////        fileToZipBufferInput("d://ddd.jpg", "d://ddd.zip");
+////        long end = Clock.systemDefaultZone().millis();
+////        System.out.println("bufferInputStream用时:" + (end - start));
+////        // fileTOZipInput("d://ddd.jpg", "d:/ddd2.zip");
+////        long end2 = Clock.systemDefaultZone().millis();
+////        System.out.println("intpuStream用时: " + (end2 - end));
+////        fileToZipChannel("d://ddd.jpg", "d:/ddd3.zip");
+////        long end3 = Clock.systemDefaultZone().millis();
+////        System.out.println("fileChannel用时: " + (end3 - end2));
+
+        write("D:\\doc", "D:\\doc\\success", "123.doc");
     }
 
     private static void fileToZipBufferInput(String filePath, String zipPath){
@@ -78,6 +79,28 @@ public class FileZipUtils {
 
                 }
             }
+        }catch (Exception ignored){
+
+        }
+    }
+
+    private static void write(String srcDir, String descDir, String fileName){
+        File srcFile = new File(srcDir + File.separator + fileName);
+        File descFile = new File(descDir + File.separator + fileName);
+        try (WritableByteChannel writableByteChannel = Channels.newChannel(new FileOutputStream(descFile));
+             FileChannel fileChannel = new FileInputStream(srcFile).getChannel()){
+            fileChannel.transferTo(0, fileChannel.size(), writableByteChannel);
+        }catch (Exception ignored){
+
+        }
+    }
+
+    private static void write2(String srcDir, String descDir, String fileName){
+        File srcFile = new File(srcDir + File.separator + fileName);
+        File descFile = new File(descDir + File.separator + fileName);
+        try (FileChannel out =new FileOutputStream(descFile).getChannel();
+             FileChannel in = new FileInputStream(srcFile).getChannel()){
+            out.transferTo(0, out.size(), in);
         }catch (Exception ignored){
 
         }

@@ -1,6 +1,8 @@
 package com.ysb.utils;
 
+import com.sun.istack.internal.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
 import org.springframework.lang.NonNull;
 
 import javax.imageio.stream.FileImageInputStream;
@@ -55,8 +57,8 @@ public class ImageBase64Utils {
 	 * @param imgUrl 图片地址
 	 * @return base64 字符串
 	 */
-	public static String generatebase64Imageurl(@NonNull String imgUrl) throws IOException{
-		byte[] data =null;
+	public static String generateBase64ImageUrl(@NonNull String imgUrl) throws IOException{
+		byte[] data;
         URL url = new URL(imgUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(3*1000);
@@ -85,7 +87,7 @@ public class ImageBase64Utils {
 	}
 
 	public static byte[] image2byte2(@NonNull String path){
-        byte[] data = null;
+        byte[] data;
 	    try (FileImageInputStream input = new FileImageInputStream(new File(path)); ByteArrayOutputStream output = new ByteArrayOutputStream()){
             byte[] buf = new byte[1024];
             int numBytesRead = 0;
@@ -158,4 +160,15 @@ public class ImageBase64Utils {
         }
         return bytes;
     }
+
+    public static boolean checkImgUrl(@NotNull String imgUrl) throws IOException {
+        URL url = new URL(imgUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //防止屏蔽程序抓取而返回403错误
+        conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+        return conn.getResponseCode() == HttpStatus.SC_OK;
+    }
+
+
+
 }

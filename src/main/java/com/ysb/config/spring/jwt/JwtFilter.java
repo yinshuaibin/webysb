@@ -45,17 +45,26 @@ public class JwtFilter extends OncePerRequestFilter {
         String tokenPrefix = JwtUtil.getTokenPrefix();
         if (StringUtils.isNotBlank(header) && header.startsWith(tokenPrefix)){
             String token = header.replace(tokenPrefix, "");
-            UserDetails userDetails = null;
+            UserDetails userDetails;
             try {
                 String username = JwtUtil.getUsername(token);
-                userDetails = myUserDetailService.loadUserByUsername(username);
+                if (username == null){
+                    throw new AuthenticationServiceException("权限校验失败");
+                }
+                if(JwtUtil.verify(token, username)){
+                    userDetails = myUserDetailService.loadUserByUsername(username);
+                    if (userDetails != null){
+                        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails,
+                                userDetails.getPassword(), userDetails.getAuthorities()));
+                    }else {
+                        throw new AuthenticationServiceException("用户不存在");
+                    }
+                }
             } catch (Exception e){
+                log.error("权限校验出现异常:{}", e);
                 noPermissionEntryPoint.commence(httpServletRequest, httpServletResponse,
                         new AuthenticationServiceException(e.getMessage()));
-            }
-            if (userDetails != null){
-                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails,
-                        userDetails.getPassword(), userDetails.getAuthorities()));
+                return;
             }
         }
         // 进入下一个过滤器, 由于SecurityContext,无权限并不会放行

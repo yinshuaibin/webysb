@@ -21,8 +21,8 @@ public class LogoutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         Map<String, String> result = new HashMap<>(2);
-        result.put("errorCode", "200");
-        result.put("errorMsg", "logout");
+        result.put("code", "200");
+        result.put("msg", "logout");
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(String.valueOf(result));
     }

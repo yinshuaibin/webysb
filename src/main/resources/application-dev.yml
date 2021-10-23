@@ -48,6 +48,16 @@ spring:
     multipart:
       max-request-size: 10MB #最大请求文件的大小
       max-file-size: 20MB #设置单个文件最大长度
+management:
+  endpoint:
+    health:
+      # 是否展示健康检查详情
+      show-details: always
+#  endpoints:
+#    web:
+#      exposure:
+#        # 暴露metrics端点,多个用,分割,所有用*
+#        include: metrics
 
 #pagehelper分页插件配置
 pagehelper:
