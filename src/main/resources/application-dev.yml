@@ -1,6 +1,9 @@
 ﻿server:
   port: 9998
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     druid:
       url: jdbc:mysql://120.27.60.184:3306/ysb?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
@@ -25,6 +28,12 @@ spring:
       use-global-data-source-stat: true
   aop:
     auto: true
+  jpa:
+    hibernate:
+      #     更新或者创建数据表结构
+      ddl-auto: update
+    #    控制台显示SQL
+    show-sql: true
   redis:
     host: 120.27.60.184
     port: 6379
