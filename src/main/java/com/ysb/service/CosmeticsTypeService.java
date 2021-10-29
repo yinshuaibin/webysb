@@ -23,4 +23,12 @@ public interface CosmeticsTypeService {
      * @param cosmeticsType 类型
      */
     void saveCosmeticsType(CosmeticsType cosmeticsType);
+
+
+    /**
+     * 删除对应的化妆品信息
+     * @param id 主键id
+     * @return 0成功, 1失败
+     */
+    int deleteType(Integer id);
 }

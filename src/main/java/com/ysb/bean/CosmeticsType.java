@@ -2,8 +2,11 @@ package com.ysb.bean;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author yinshuaibin
@@ -13,6 +16,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "cosmetics_type")
 public class CosmeticsType {
 
@@ -27,4 +31,7 @@ public class CosmeticsType {
     @Column(columnDefinition="varchar(50) not null COMMENT'名称'")
     private String name;
 
+    @CreatedDate
+    @Column(columnDefinition="datetime not null COMMENT'创建时间'")
+    private Date createTime;
 }

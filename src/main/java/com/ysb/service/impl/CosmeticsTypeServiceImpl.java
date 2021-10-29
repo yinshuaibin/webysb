@@ -11,10 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author yinshuaibin
@@ -62,5 +59,16 @@ public class CosmeticsTypeServiceImpl implements CosmeticsTypeService {
             cosmeticsType.setTypeId(UUID.randomUUID().toString());
         }
         cosmeticsTypeDao.save(cosmeticsType);
+    }
+
+    /**
+     *
+     * @param id 主键id
+     * @return 0成功, 1失败
+     */
+    @Override
+    public int deleteType(Integer id) {
+        cosmeticsTypeDao.deleteCosmeticsTypeById(id);
+        return 1;
     }
 }
