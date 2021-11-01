@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
+ * 化妆品类型
  * @author yinshuaibin
  * @date 2021/10/25 22:06
  * @description
@@ -28,7 +29,7 @@ public class CosmeticsType {
     @Column(columnDefinition="varchar(50) not null COMMENT'类别id'")
     private String typeId;
 
-    @Column(columnDefinition="varchar(50) not null COMMENT'名称'")
+    @Column(columnDefinition="varchar(50) not null COMMENT'化妆品名称'")
     private String name;
 
     @CreatedDate

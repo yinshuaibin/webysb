@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 化妆品进货表
+ * 化妆品兑奖表
  * @author yinshuaibin
  * @date 2021/10/24 14:54
  * @description
@@ -19,28 +19,28 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "cosmetics_stock")
-public class CosmeticsStock {
+@Table(name = "cosmetics_redeem")
+public class CosmeticsRedeem {
 
     @Id
     @Column(columnDefinition="int COMMENT '主键，自动生成'")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    @Column(columnDefinition="varchar(50) COMMENT'兑奖客户'")
+    private String redeemClient;
+
     @Column(columnDefinition="varchar(50) COMMENT'类别id'")
-    private String stockType;
+    private String redeemType;
 
-    @Column(columnDefinition="varchar(32) COMMENT'进货客户'")
-    private String stockClient;
+    @Column(columnDefinition="int not null COMMENT'兑奖数量'")
+    private int redeemNumber;
 
-    @Column(columnDefinition="int not null COMMENT'进货数量'")
-    private int stockNumber;
-
-    @Column(columnDefinition="datetime COMMENT'进货时间'")
-    private String stockTime;
+    @Column(columnDefinition="datetime COMMENT'兑奖时间'")
+    private String redeemTime;
 
     @Column(columnDefinition="varchar(256) COMMENT'备注'")
-    private int remark;
+    private String remark;
 
     @CreatedDate
     @Column(columnDefinition="datetime not null COMMENT'创建时间'")

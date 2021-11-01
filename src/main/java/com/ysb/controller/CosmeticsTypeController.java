@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
+ * 化妆品类别
  * @author yinshuaibin
  * @date 2021/10/25 22:12
  * @description
@@ -26,6 +27,11 @@ public class CosmeticsTypeController extends BaseController {
         this.cosmeticsTypeService = cosmeticsTypeService;
     }
 
+    /**
+     * 分页查询所有
+     * @param reqMap
+     * @return
+     */
     @PostMapping("/findAllCosmeticsType")
     public Object findAllCosmeticsType(@RequestBody Map reqMap){
         int pageNum = (int) reqMap.get("pageNum");
