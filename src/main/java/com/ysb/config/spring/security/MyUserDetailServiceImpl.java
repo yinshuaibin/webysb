@@ -1,7 +1,6 @@
 package com.ysb.config.spring.security;
 
 import com.ysb.bean.User;
-import com.ysb.dao.UserMapper;
 import com.ysb.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -37,7 +37,7 @@ public class CosmeticsRedeem {
     private int redeemNumber;
 
     @Column(columnDefinition="datetime COMMENT'兑奖时间'")
-    private String redeemTime;
+    private Date redeemTime;
 
     @Column(columnDefinition="varchar(256) COMMENT'备注'")
     private String remark;
@@ -48,5 +48,5 @@ public class CosmeticsRedeem {
 
     @LastModifiedDate
     @Column(columnDefinition="datetime COMMENT'更新时间'")
-    private String updateTime;
+    private Date updateTime;
 }

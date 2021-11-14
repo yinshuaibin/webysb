@@ -64,4 +64,22 @@ public class CosmeticsStockServiceImpl implements CosmeticsStockService {
         };
         return new PageDTO<>(cosmeticsStockDao.findAll(querySpecifi, PageRequest.of(pageNum, pageSize)));
     }
+
+    /**
+     *
+     * @param cosmeticsStock 实体类
+     */
+    @Override
+    public void saveCosmeticsStock(CosmeticsStock cosmeticsStock) {
+        cosmeticsStockDao.save(cosmeticsStock);
+    }
+
+    /**
+     *
+     * @param id 删除
+     */
+    @Override
+    public void deleteCosmeticsStock(int id) {
+        cosmeticsStockDao.deleteById(id);
+    }
 }

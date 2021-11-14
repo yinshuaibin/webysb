@@ -1,8 +1,10 @@
 package com.ysb.controller;
 
+import com.ysb.bean.CosmeticsStock;
 import com.ysb.controller.base.BaseController;
 import com.ysb.service.CosmeticsStockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,4 +41,13 @@ public class CosmeticsStockController extends BaseController {
         return cosmeticsStockService.findAllCosmeticsStock(pageNum, pageSize, startDate, endDate, stockType);
     }
 
+    @GetMapping("/deleteCosmeticsStock")
+    public void delete(int id){
+        cosmeticsStockService.deleteCosmeticsStock(id);
+    }
+
+    @PostMapping("/saveCosmeticsStock")
+    public void saveCosmeticsStock(@RequestBody CosmeticsStock cosmeticsStock){
+        cosmeticsStockService.saveCosmeticsStock(cosmeticsStock);
+    }
 }

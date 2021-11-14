@@ -37,10 +37,10 @@ public class CosmeticsStock {
     private int stockNumber;
 
     @Column(columnDefinition="datetime COMMENT'进货时间'")
-    private String stockTime;
+    private Date stockTime;
 
     @Column(columnDefinition="varchar(256) COMMENT'备注'")
-    private int remark;
+    private String remark;
 
     @CreatedDate
     @Column(columnDefinition="datetime not null COMMENT'创建时间'")
@@ -48,5 +48,5 @@ public class CosmeticsStock {
 
     @LastModifiedDate
     @Column(columnDefinition="datetime COMMENT'更新时间'")
-    private String updateTime;
+    private Date updateTime;
 }

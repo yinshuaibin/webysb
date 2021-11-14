@@ -1,8 +1,9 @@
 package com.ysb.service.impl;
 
 import com.ysb.bean.User;
-import com.ysb.dao.UserMapper;
+import com.ysb.mapper.UserMapper;
 import com.ysb.service.UserService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
         return 1;
     }
 
+    @Cacheable(cacheNames= "user", key="#p0",  unless="#result == null")
     @Override
     public User findUserByUserName(String username) {
         return userMapper.findUserByUserName(username);

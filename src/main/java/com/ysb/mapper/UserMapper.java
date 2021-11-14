@@ -1,11 +1,9 @@
-package com.ysb.dao;
+package com.ysb.mapper;
 
 import com.ysb.bean.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-
-import javax.annotation.Resource;
 
 /**
  * @author yinshuaibin
