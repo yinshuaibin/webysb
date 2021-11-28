@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +60,10 @@ public class CosmeticsStockServiceImpl implements CosmeticsStockService {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("stockTime").as(String.class), startDate));
             }
             if (StringUtils.isNotBlank(endDate)){
-                predicates.add(cb.lessThanOrEqualTo(root.get("stockTime").as(String.class), endDate));
+                LocalDate parse = LocalDate.parse(endDate);
+                LocalDate localDate = parse.plusDays(1);
+                String format = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                predicates.add(cb.lessThanOrEqualTo(root.get("stockTime").as(String.class), format));
             }
             return cb.and(predicates.toArray(new Predicate[0]));
         };
